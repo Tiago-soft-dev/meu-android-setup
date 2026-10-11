@@ -1,12 +1,42 @@
 {
-  "name": "Android Setup",
-  "image": "mcr.microsoft.com/devcontainers/universal:2",
+  "name": "Android Studio Web Container",
+  "image": "mcr.microsoft.com/devcontainers/java:21-bullseye",
+  
   "customizations": {
     "vscode": {
+      "settings": {
+        "workbench.colorTheme": "Darcula - Android Studio",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 4,
+        "java.configuration.runtimes": [
+          {
+            "name": "JavaSE-21",
+            "path": "/usr/local/sdkman/candidates/java/21.0.7-ms",
+            "default": true
+          }
+        ]
+      },
       "extensions": [
+        "formulahendry.code-runner",
+        "fwcd.kotlin",
+        "github.codespaces",
+        "github.github-vscode-theme",
+        "github.vscode-pull-request-github",
+        "levkosyk.vscode-android-tools",
+        "ms-ceintl.vscode-language-pack-pt-br",
+        "redhat.java",
+        "shayanahmedkhan.android-studio-color-theme",
+        "vscjava.vscode-gradle",
+        "vscjava.vscode-java-debug",
+        "vscjava.vscode-java-dependency",
         "vscjava.vscode-java-pack",
-        "redhat.java"
+        "vscjava.vscode-java-test",
+        "vscjava.vscode-maven"
       ]
     }
-  }
+  },
+
+  "postCreateCommand": "sudo apt update && sudo apt install -y gradle unzip && bash -c 'source $HOME/.sdkman/bin/sdkman-init.sh && sdk install kotlin 2.4.21' && echo 'export ANDROID_HOME=$HOME/android-sdk' >> ~/.bashrc && echo 'export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools' >> ~/.bashrc",
+
+  "remoteUser": "vscode"
 }
